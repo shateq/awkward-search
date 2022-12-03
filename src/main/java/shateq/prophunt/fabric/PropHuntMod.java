@@ -19,7 +19,7 @@ public class PropHuntMod implements ClientModInitializer {
     public static final List<Item> operatorItems = List.of(Items.AIR, Items.BARRIER, Items.LIGHT, Items.DEBUG_STICK,
         Items.COMMAND_BLOCK, Items.COMMAND_BLOCK_MINECART, Items.CHAIN_COMMAND_BLOCK, Items.REPEATING_COMMAND_BLOCK,
         Items.SPAWNER, Items.JIGSAW, Items.STRUCTURE_BLOCK, Items.STRUCTURE_VOID);
-    public static int hardLimit = 60; //TODO CONFIG
+    public static int hardLimit = 70; //TODO CONFIG
     private static boolean operator = false;
 
     /*public static <T> List<BoundExtractedResult<T>> sortedExtraction(String query, Collection<T> choices, ToStringFunction<T> toStr, ToStringFunction<T> opt) {
@@ -31,7 +31,7 @@ public class PropHuntMod implements ClientModInitializer {
     public static boolean isOperator() {
         if (operator) return true;
         assert MinecraftClient.getInstance().player != null;
-        return MinecraftClient.getInstance().player.hasPermissionLevel(2);
+        return MinecraftClient.getInstance().player.hasPermissionLevel(3);
     }
 
     @Override

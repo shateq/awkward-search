@@ -1,6 +1,7 @@
 package shateq.prophunt.mixin;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.xdrop.fuzzywuzzy.ToStringFunction;
 import me.xdrop.fuzzywuzzy.model.BoundExtractedResult;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
@@ -31,16 +32,18 @@ public abstract class MixinCreativeInventoryScreen extends AbstractInventoryScre
 
     @Inject(method = "search", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;scrollItems(F)V"))
     protected void search(CallbackInfo ci) {
-        final String search = this.searchBox.getText().toLowerCase(Locale.ROOT);
+        String search = this.searchBox.getText().toLowerCase(Locale.ROOT);
         var handler = (CreativeInventoryScreen.CreativeScreenHandler) this.handler;
         if (search.isEmpty() || search.startsWith("#")) return;
         handler.itemList.clear(); //TODO subject
 
         var items = Registry.ITEM.stream().toList();
-        var allSorted =
-            FuzzySearch.extractSorted(search, items,
-                item -> item.toString().replaceAll("_", " ")
-            );
+        ToStringFunction<Item> toStr = search.startsWith(".") ?
+            item -> item.toString().replaceAll("_", " ") :
+            item -> item.getName().getString();
+
+        search = search.substring(1);
+        var allSorted = FuzzySearch.extractSorted(search, items, toStr);
 
         ArrayList<ItemStack> stacks = new ArrayList<>();
         for (BoundExtractedResult<Item> i : allSorted) {
@@ -52,14 +55,8 @@ public abstract class MixinCreativeInventoryScreen extends AbstractInventoryScre
         }
 
         this.handler.itemList.addAll(stacks);
-        /*for (Item item : Registry.ITEM) {
-            final String q1 = item.toString();
-            final String q2 = item.getName().getString();
-            //final int ratio = FuzzySearch.ratio(search.toLowerCase(Locale.ROOT), query);
-            final int partial = FuzzySearch.partialRatio(search.toLowerCase(Locale.ROOT), q1);
-            if (ratio > 50 || partial > 50) {
-                handler.itemList.add(item.getDefaultStack());
-            }
-        }*/
     }
+    // TODO TOOLTIP WHEN .
+    //@Inject(method = "renderTooltip", at = @At("TAIL"))
+    //protected void tooltip(MatrixStack matrices, ItemStack stack, int x, int y, CallbackInfo ci) {}
 }

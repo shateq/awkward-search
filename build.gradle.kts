@@ -7,7 +7,6 @@ plugins {
 
 fun e(key: String) = project.extra.get(key) as String
 
-val modid = "prophunt"
 version = "1.0.0"
 group = "shateq.mods"
 base.archivesName.set("prop-hunt-mc${e("mc")}")
@@ -25,7 +24,7 @@ dependencies {
 }
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-loom.mixin.defaultRefmapName.set("$modid.refmap.json")
+loom.mixin.defaultRefmapName.set("prophunt.refmap.json")
 
 tasks {
     jar {
@@ -41,7 +40,6 @@ tasks {
         filteringCharset = Charsets.UTF_8.name()
         filesMatching("fabric.mod.json") {
             expand(
-                "modid" to modid,
                 "version" to project.version,
                 "description" to project.description
             )

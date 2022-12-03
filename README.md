@@ -1,12 +1,22 @@
+<img src=""/>
+
 # Prop Hunt
 
 Wear the frustration off! Fuzzy search for Minecraft.
 
-Only operators (or Operator Items - ON) can see Operator Items
+## State
 
-<a href="https://modrinth.com/mod/fabric-api">
-<img src="https://i.imgur.com/Ol1Tcf8.png" height="64">
-</a>
+No World, Controls, Language search
+
+Lacks some of the cool features that are with Vanilla (searching through potions)
+
+API to extend VSE (Vanilla Search Engine) noninvasive
+
+#### Additions
+
+Only operators (or Operator Items - ON) can see Operator Items.
+
+Start your search with `.` to index through Item id's
 
 ## Download
 
