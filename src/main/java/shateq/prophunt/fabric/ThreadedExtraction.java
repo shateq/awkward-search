@@ -8,11 +8,11 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.Locale;
 
-public class ThreadedItemLooping extends Thread {
+public class ThreadedGenericLooping extends Thread {
     private final DefaultedList<ItemStack> itemList;
     private final String search;
 
-    public ThreadedItemLooping(String search, DefaultedList<ItemStack> list) {
+    public ThreadedGenericLooping(String search, DefaultedList<ItemStack> list) {
         this.search = search;
         this.itemList = list;
     }

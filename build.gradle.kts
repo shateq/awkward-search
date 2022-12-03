@@ -20,7 +20,6 @@ dependencies {
     //mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${e("loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${e("fapi")}")
-
     implementation("me.xdrop:fuzzywuzzy:1.4.0")
     include("me.xdrop:fuzzywuzzy:1.4.0")
 }
@@ -52,15 +51,16 @@ tasks {
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN")) //Remember to have the MODRINTH_TOKEN environment variable set or else this will fail, or set it to whatever you want - just make sure it stays private!
-    projectId.set("my-project")
+    projectId.set("prophunt")
+    versionType.set("alpha")
 
     versionName.set("${project.version} for MC ${project.extra["mc"]}")
     versionNumber.set(version.toString())
-    versionType.set("alpha")
+
     uploadFile.set(tasks[tasks.remapJar.name])
     gameVersions.addAll("1.19", "1.19.1", "1.19.2")
     dependencies {
         // scope.type: can be `required`, `optional`, `incompatible`, or `embedded`
-        required.project("fabric-api")
+        optional.project("fabric-api")
     }
 }
