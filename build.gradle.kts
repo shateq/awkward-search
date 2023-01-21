@@ -1,8 +1,8 @@
 plugins {
     `java-library`
     `maven-publish`
-    id("fabric-loom") version "1.0-SNAPSHOT"
-    id("com.modrinth.minotaur") version "2.+"
+    id("fabric-loom")
+    id("com.modrinth.minotaur")
 }
 
 fun e(key: String) = project.extra.get(key) as String
@@ -17,8 +17,10 @@ dependencies {
     minecraft("com.mojang:minecraft:${e("mc")}")
     mappings("net.fabricmc:yarn:${e("yarn")}:v2")
     //mappings(loom.officialMojangMappings())
+
     modImplementation("net.fabricmc:fabric-loader:${e("loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${e("fapi")}")
+
     implementation("me.xdrop:fuzzywuzzy:1.4.0")
     include("me.xdrop:fuzzywuzzy:1.4.0")
 }

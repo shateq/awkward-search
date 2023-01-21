@@ -2,7 +2,7 @@
 
 # Prop Hunt
 
-Wear the frustration off! Fuzzy search for Minecraft.
+**Wear the searching frustration off!** Fuzzy search for Minecraft.
 
 ## State
 
