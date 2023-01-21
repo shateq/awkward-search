@@ -30,7 +30,10 @@ public abstract class MixinCreativeInventoryScreen extends AbstractInventoryScre
         super(new CreativeInventoryScreen.CreativeScreenHandler(player), player.getInventory(), ScreenTexts.EMPTY);
     }
 
-    @Inject(method = "search", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;scrollItems(F)V"))
+    @Inject(
+        method = "search",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/CreativeInventoryScreen$CreativeScreenHandler;scrollItems(F)V")
+    )
     protected void search(CallbackInfo ci) {
         String search = this.searchBox.getText().toLowerCase(Locale.ROOT);
         var handler = (CreativeInventoryScreen.CreativeScreenHandler) this.handler;
